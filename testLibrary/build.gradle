@@ -1,4 +1,38 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+ext {
+    supportLibVersion = '28.0.0'
+    bintrayRepo = 'lib-test' // Name of the Bintray repo you created
+    bintrayName = 'com.saspossible.myfirstlibrary:testLibrary' // Bintray package name
+
+    publishedGroupId = 'com.saspossible.myfirstlibrary' // Group ID of the SDK which will be added in implementation line of gradle
+    artifact = 'testLibrary' // Artifact ID of the SDK which will be added in implementation line of gradle
+    libraryVersion = '0.0.2' // Version of the library you created in Bintray
+
+    libraryName = 'lib-test' // It is generally the module name
+    libraryDescription = 'lib-test to use shared preference in your app.' // Small description of the library
+
+    siteUrl = 'https://github.com/Kukuhp/myFirstLibrary'
+    gitUrl = 'https://github.com/Kukuhp/myFirstLibrary.git'
+
+    developerId = 'saspossibe'
+    developerName = 'kukuh'
+    developerEmail = 'kukuhprias@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+
+    //Bintray Credentials
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    bintrayUsername = properties.getProperty('BINTRAY_USERNAME')
+    bintrayUserOrg = properties.getProperty('BINTRAY_ORG')
+    bintrayApiKey = properties.getProperty('BINTRAY_API_KEY')
+}
 
 android {
     compileSdkVersion 29
@@ -10,17 +44,16 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
 
 }
+
+apply from: 'bintray.script'

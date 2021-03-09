@@ -1,0 +1,9 @@
+# compiler: R8
+# compiler_version: 2.0.88
+# pg_map_id: de8a266
+# common_typos_disable
+com.saspossible.testlibrary.BuildConfig -> com.saspossible.testlibrary.BuildConfig:
+    1:1:void <init>():6:6 -> <init>
+com.saspossible.testlibrary.testClass -> com.saspossible.testlibrary.testClass:
+    1:1:void <init>():5:5 -> <init>
+    1:1:void check1():7:7 -> check1
